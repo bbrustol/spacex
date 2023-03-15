@@ -25,7 +25,7 @@ import com.bbrustol.uikit.theme.SpacexTheme
 import com.bbrustol.uikit.utils.LoadImage
 import com.bbrustol.uikit.extensions.card
 import com.bbrustol.features.R
-import com.bbrustol.features.home.model.LaunchesItemModel
+import com.bbrustol.features.home.model.LaunchesModel
 import com.bbrustol.features.home.model.HomeModel
 
 @Composable
@@ -53,18 +53,18 @@ fun RenderState(state: State) = when (state) {
 
 @Composable
 fun ShowSuccess(homeModel: HomeModel) {
-
+    Log.d("Api", "Success")
     val state = rememberLazyListState()
     LazyColumn(state = state) {
-        items(homeModel.launchesModel) { launchesItemModel ->
-            ArticleItem(homeModel.companyInfoModel, launchesItemModel)
+        items(homeModel.launchesModel) { launchesModel ->
+            ArticleItem(homeModel.companyInfoModel, launchesModel)
         }
     }
 }
 
 @Composable
-fun ArticleItem(companyInfoModel: CompanyInfoModel, launchesItemModel: LaunchesItemModel) {
-    with(launchesItemModel) {
+fun ArticleItem(companyInfoModel: CompanyInfoModel, launchesModel: LaunchesModel) {
+    with(launchesModel) {
         Card(
             elevation = dimensionResource(id = R.dimen.card_elevation),
             shape = MaterialTheme.shapes.card,
@@ -74,7 +74,7 @@ fun ArticleItem(companyInfoModel: CompanyInfoModel, launchesItemModel: LaunchesI
         ) {
             Column(Modifier.fillMaxWidth()) {
                 LoadImage(
-                    imageUrl = imageUrl,
+                    imageUrl = imageUrl ?: "https://thumbs.dreamstime.com/z/businessman-plan-rocket-crashed-business-failure-rocket-fall-down-businessman-plan-rocket-crashed-business-210529571.jpg",
                     contentDescription = stringResource(R.string.image_default_accessibility),
                     Modifier
                         .fillMaxWidth()

@@ -1,12 +1,12 @@
 package com.bbrustol.features.home.model.mappers
 
-import com.bbrustol.core.data.remote.spacex.model.response.launches.LaunchesItemResponse
-import com.bbrustol.features.home.model.LaunchesItemModel
+import com.bbrustol.core.data.remote.spacex.model.response.launches.LaunchesResponse
+import com.bbrustol.features.home.model.LaunchesModel
 
-fun List<LaunchesItemResponse>.toListLaunchModel() = map { it.toLaunchesItemModel() }
+fun List<LaunchesResponse>.toListLaunchModel() = map { it.toLaunchesModel() }
 
-fun LaunchesItemResponse.toLaunchesItemModel() =
-    LaunchesItemModel(
+fun LaunchesResponse.toLaunchesModel() =
+    LaunchesModel(
         id = flight_number,
         imageUrl = links.mission_patch_small,
         missionName = mission_name,

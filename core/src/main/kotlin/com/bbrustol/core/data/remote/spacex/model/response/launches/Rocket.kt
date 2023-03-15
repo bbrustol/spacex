@@ -1,7 +1,7 @@
 package com.bbrustol.core.data.remote.spacex.model.response.launches
 
 data class Rocket(
-    val fairings: Fairings,
+    val fairings: Fairings?,
     val first_stage: FirstStage,
     val rocket_id: String,
     val rocket_name: String,

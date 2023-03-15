@@ -10,6 +10,6 @@ interface SpacexService {
     suspend fun getCompanyInfo(): Response<CompanyInfoResponse>
 
     @GET("launches")
-    suspend fun getLaunches(): Response<LaunchesResponse>
+    suspend fun getLaunches(): Response<List<LaunchesResponse>>
 
 }

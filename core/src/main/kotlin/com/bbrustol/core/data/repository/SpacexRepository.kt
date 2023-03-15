@@ -22,7 +22,7 @@ class SpacexRepository @Inject constructor(private val remoteSpacexDataSource: S
         }.flowOn(dispatcher())
     }
 
-    suspend fun getLaunches(): Flow<ApiResult<LaunchesResponse>> {
+    suspend fun getLaunches(): Flow<ApiResult<List<LaunchesResponse>>> {
         return flow {
             emit(handleApi { remoteSpacexDataSource.getLaunches() })
         }.flowOn(dispatcher())
