@@ -1,4 +1,4 @@
-package com.mindera.rocketscience
+package com.bbrustol.spacex
 
 import org.junit.Test
 

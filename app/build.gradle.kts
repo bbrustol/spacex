@@ -3,7 +3,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 android {
-    namespace = "com.bbrustol.newarchtest"
+    namespace = "com.bbrustol.spacex"
 
     hilt {
         enableExperimentalClasspathAggregation = false
@@ -12,4 +12,6 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.UIKIT))
+    implementation(project(Modules.FEATURES))
 }
