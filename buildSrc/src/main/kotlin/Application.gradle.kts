@@ -16,7 +16,7 @@ android {
     compileSdk = Versions.App.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.bbrustol.newarchtest"
+        applicationId = "com.bbrustol.spacex"
         minSdk = Versions.App.MIN_SDK
         targetSdk = Versions.App.TARGET_SDK
         versionCode = Versions.App.VERSION_CODE

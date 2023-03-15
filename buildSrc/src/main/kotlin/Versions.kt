@@ -22,8 +22,6 @@ object Versions {
         const val COMPOSE = "1.3.1"
         const val COMPOSE_UI = "1.3.3"
         const val COMPOSE_COMPILER = "1.4.3"
-        const val FRAGMENT = "1.5.5"
-        const val MULTIDEX = "1.0.3"
     }
 
     object Squareup {

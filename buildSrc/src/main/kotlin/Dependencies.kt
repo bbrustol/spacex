@@ -13,15 +13,15 @@ object Dependencies {
     object AndroidX {
         const val CORE_KTX = "androidx.core:core-ktx:${Versions.AndroidX.CORE_KTX}"
         const val APPCOMPAT = "androidx.appcompat:appcompat:${Versions.AndroidX.APPCOMPAT}"
-        const val LIFECYCLE ="androidx.lifecycle:lifecycle-runtime-ktx:${Versions.AndroidX.LIFECYCLE}"
         const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:${Versions.AndroidX.ACTIVITY_COMPOSE}"
-        const val FRAGMENT = "androidx.fragment:fragment-ktx:${Versions.AndroidX.FRAGMENT}"
 
         object Compose {
             // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
             const val FOUNDATION = "androidx.compose.foundation:foundation:${Versions.AndroidX.COMPOSE}"
             const val MATERIAL = "androidx.compose.material:material:${Versions.AndroidX.COMPOSE}"
             const val UI ="androidx.compose.ui:ui:${Versions.AndroidX.COMPOSE_UI}"
+            const val LIFECYCLE_VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.AndroidX.LIFECYCLE}"
+
             // Tooling support (Previews, etc.)
             const val UI_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.AndroidX.COMPOSE_UI}"
             const val UI_TOOLING_PREVIEW = "androidx.compose.ui:ui-tooling-preview:${Versions.AndroidX.COMPOSE_UI}"
@@ -71,12 +71,11 @@ object Dependencies {
         "implementation"(Google.MATERIAL)
 
         "implementation"(AndroidX.ACTIVITY_COMPOSE)
-        "implementation"(AndroidX.LIFECYCLE)
-        "implementation"(AndroidX.FRAGMENT)
         "implementation"(AndroidX.Compose.FOUNDATION)
         "implementation"(AndroidX.Compose.MATERIAL)
         "implementation"(AndroidX.Compose.UI)
         "implementation"(AndroidX.Compose.UI_TOOLING_PREVIEW)
+        "implementation"(AndroidX.Compose.LIFECYCLE_VIEWMODEL)
         "debugImplementation"(AndroidX.Compose.UI_TOOLING)
         "implementation"(Others.COIL)
     }
