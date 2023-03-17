@@ -45,7 +45,8 @@ fun HomeScreen(
 
 @Composable
 fun RenderState(state: State) = when (state) {
-    is Loading -> isLoading(state.flag)
+    Idle -> isIdle()
+    Loading -> isLoading()
     is Failure -> showError(state.code, state.message)
     is Catch -> showGenericError(state.message ?: stringResource(R.string.catch_generic_message))
     is Success -> ShowSuccess(state.homeModel)
@@ -53,7 +54,7 @@ fun RenderState(state: State) = when (state) {
 
 @Composable
 fun ShowSuccess(homeModel: HomeModel) {
-    Log.d("Api", "Success")
+    Log.d("UI", "Success")
     val state = rememberLazyListState()
     LazyColumn(state = state) {
         items(homeModel.launchesModel) { launchesModel ->
@@ -96,16 +97,21 @@ fun ArticleItem(companyInfoModel: CompanyInfoModel, launchesModel: LaunchesModel
 }
 
 private fun showGenericError(message: String) {
-    Log.d("Api", "GenericEror - $message")
+    Log.d("UI", "GenericEror - $message")
 }
 
 private fun showError(code: Int, message: String?) {
-    Log.d("Api", "Error - $code | $message")
+    Log.d("UI", "Error - $code | $message")
 }
 
-private fun isLoading(flag: Boolean) {
-    Log.d("Api", "Loding - $flag")
+private fun isLoading() {
+    Log.d("UI", "Loding")
 }
+
+fun isIdle() {
+    Log.d("UI", "Idle")
+}
+
 
 @Preview(showBackground = true)
 @Composable

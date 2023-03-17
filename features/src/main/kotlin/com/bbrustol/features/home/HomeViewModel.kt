@@ -20,12 +20,13 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _state = MutableStateFlow<State>(Loading(false))
+    private val _state = MutableStateFlow<State>(Idle)
     var state: StateFlow<State> = _state
 
     fun fetchCompanyInfo() = viewModelScope.launch {
         repository.getCompanyInfo()
-            .onStart { _state.value = Loading(true) }
+            .onStart { _state.value = Loading }
+            .catch { _state.value = Catch(it.message) }
             .collect {
                 when (it) {
                     is ApiError -> _state.value = Failure(it.code, it.message)
@@ -37,7 +38,7 @@ class HomeViewModel @Inject constructor(
 
     private fun fetchLaunches(companyInfoModel: CompanyInfoModel) = viewModelScope.launch {
         repository.getLaunches()
-            .onStart { _state.value = Loading(true) }
+            .catch { _state.value = Catch(it.message) }
             .collect {
                 _state.value = when (it) {
                     is ApiError -> Failure(it.code, it.message)
@@ -48,8 +49,10 @@ class HomeViewModel @Inject constructor(
             }
     }
 
-    sealed class State {
-        data class Loading(val flag: Boolean = false) : State()
+    sealed class State
+    {
+        object Idle : State()
+        object Loading : State()
         data class Success(val homeModel: HomeModel) : State()
         data class Failure(val code: Int, val message: String?) : State()
         data class Catch(val message: String?) : State()

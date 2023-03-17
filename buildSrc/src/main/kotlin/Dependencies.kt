@@ -45,14 +45,18 @@ object Dependencies {
 
     object Others {
         //for image rendering
-        const val COIL = "io.coil-kt:coil-compose:${Versions.COIL}"
+        const val COIL = "io.coil-kt:coil-compose:${Versions.Others.COIL}"
     }
 
     object Test {
         object Unit {
             const val JUNIT = "junit:junit:${Versions.Test.JUNIT}"
             const val MOCKK = "io.mockk:mockk:${Versions.Test.MOCKK}"
-            const val CORE_TESTING = "android.arch.core:core-testing:${Versions.Test.CORE_TESTING}"
+            const val MOCKK_AGENT = "io.mockk:mockk-agent:${Versions.Test.MOCKK}"
+
+            const val CORE_TESTING = "androidx.arch.core:core-testing:${Versions.Test.CORE_TESTING}"
+            const val TURBINE = "app.cash.turbine:turbine:${Versions.Test.TURBINE}"
+            const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.COROUTINES}"
         }
 
         object Integration {
@@ -88,6 +92,8 @@ object Dependencies {
         "implementation"(Google.Hilt.ANDROID)
         "kapt"(Google.Hilt.ANDROID_COMPILER)
 
+        "implementation"(Squareup.RETROFIT_MOSHI)
+
         "implementation"(Jetbrains.Coroutines.CORE)
         "implementation"(Jetbrains.Coroutines.ANDROID)
         "implementation"(Jetbrains.Coroutines.PLAY_SERVICES)
@@ -95,6 +101,11 @@ object Dependencies {
 
     fun DependencyHandlerScope.commonUnitTest() {
         "testImplementation"(Test.Unit.JUNIT)
+        "testImplementation"(Test.Unit.CORE_TESTING)
+        "testImplementation"(Test.Unit.TURBINE)
+        "testImplementation"(Test.Unit.MOCKK)
+        "testImplementation"(Test.Unit.MOCKK_AGENT)
+        "testImplementation"(Test.Unit.COROUTINES_TEST)
     }
 
     fun DependencyHandlerScope.commonIntegrationTest() {

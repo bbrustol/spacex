@@ -26,6 +26,11 @@ android {
         kotlinCompilerExtensionVersion = Versions.AndroidX.COMPOSE_COMPILER
     }
 
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
     // Allow references to generated code
     kapt {
         correctErrorTypes = true

@@ -31,19 +31,23 @@ object Versions {
 
     object Test {
         const val JUNIT = "4.13.2"
-        const val CORE_TESTING = "1.1.1"
+        const val CORE_TESTING = "2.2.0"
         const val JUNIT_INTEGRATION = "1.1.2"
         const val ESPRESSO = "3.4.0"
         const val COMPOSE_UI_TEST = "1.2.1"
 
-        const val MOCKK = "1.8.12.kotlin13"
+        const val MOCKK = "1.13.4"
         const val MOCK_WEBSERVER = "3.12.0"
+        const val TURBINE = "0.12.1"
+
         const val RUNNER = "1.1.0"
     }
 
-    const val COROUTINES = "1.6.4"
+    object Others {
+        const val COIL = "2.2.2"
+    }
 
-    const val COIL = "2.2.2"
+    const val COROUTINES = "1.6.4"
 
     // Make sure to update `buildSrc/build.gradle.kts` when updating this
     const val GRADLE = "7.4.1"

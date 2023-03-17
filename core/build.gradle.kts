@@ -11,8 +11,9 @@ android {
     }
 
     dependencies {
-        implementation (Squareup.RETROFIT_MOSHI)
         implementation (Squareup.RETROFIT)
         implementation (Squareup.OKHTTP3)
+
+        testImplementation(kotlin("test"))
     }
 }
