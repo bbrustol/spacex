@@ -1,39 +1,45 @@
 package com.bbrustol.uikit.utils
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.res.painterResource
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
+import com.bbrustol.uikit.R
 
 @Composable
 fun LoadImage(
-    imageUrl:String,
-    contentDescription: String?,
     modifier: Modifier = Modifier,
-    contentScale: ContentScale = ContentScale.Fit
+    imageUrl: String?,
+    contentDescription: String? = null,
+    contentScale: ContentScale = ContentScale.Crop,
+    @DrawableRes placeholder: Int
 ) {
     if (LocalInspectionMode.current) {
-        Box(modifier = modifier.background(Color.Magenta))
+        Image(
+            painter = painterResource(id = R.drawable.crash_rocket_with_bg),
+            contentDescription = null,
+            contentScale = contentScale,
+            modifier = modifier
+        )
         return
     }
     SubcomposeAsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
             .data(imageUrl)
             .crossfade(true)
+            .error(placeholder)
             .build(),
         loading = {
             CircularProgressIndicator()
         },
-        modifier = Modifier.clip(RectangleShape),
+        modifier = modifier,
         contentScale = contentScale,
         contentDescription = contentDescription
     )
