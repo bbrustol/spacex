@@ -3,7 +3,7 @@
 
     <string name="catch_generic_message">Generic Error, Try again</string>
 
-    <string name="home_header">%1$s was founded by %2$s in %3$d. It has now %4$d employees, %5$d launch sides, and is value at USD %6$s</string>
+    <string name="home_header">%1$s was founded by %2$s in %3$d. It has now %4$d employees, %5$d launch sides, and is value at %6$s</string>
     <string name="home_mission">Mission: %1$s</string>
     <string name="home_datetime">Data/time: %1$s at %2$s</string>
     <string name="home_rocket">Rocket: %1$s / %2$s</string>

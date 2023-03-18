@@ -16,7 +16,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bbrustol.features.R
 import com.bbrustol.features.home.HomeViewModel.State
 import com.bbrustol.features.home.HomeViewModel.State.*
-import com.bbrustol.features.home.compose.CardSample
+import com.bbrustol.features.home.compose.CardCompanyInfo
+import com.bbrustol.features.home.compose.CardLaunch
 import com.bbrustol.features.home.model.HomeModel
 import com.bbrustol.uikit.theme.SpacexTheme
 
@@ -55,8 +56,11 @@ fun ShowSuccess(homeModel: HomeModel) {
     val context = LocalContext.current
     val state = rememberLazyListState()
     LazyColumn(state = state) {
+        item {
+            CardCompanyInfo(homeModel.companyInfoModel)
+        }
         items(homeModel.launchesModel) {
-            CardSample(it) {
+            CardLaunch(it) {
                 Toast.makeText(context, it.rocketName, Toast.LENGTH_SHORT).show()
             }
         }
