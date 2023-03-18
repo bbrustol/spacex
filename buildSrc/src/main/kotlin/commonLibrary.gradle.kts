@@ -12,6 +12,12 @@ plugins {
 
 android {
     compileSdk = Versions.App.COMPILE_SDK
+
+    packagingOptions {
+        resources {
+            resources.excludes.add("META-INF/*")
+        }
+    }
 }
 
 dependencies {

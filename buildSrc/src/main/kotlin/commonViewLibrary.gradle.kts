@@ -31,6 +31,13 @@ android {
             isIncludeAndroidResources = true
         }
     }
+
+    packagingOptions {
+        resources {
+            resources.excludes.add("META-INF/*")
+        }
+    }
+
     // Allow references to generated code
     kapt {
         correctErrorTypes = true

@@ -58,10 +58,7 @@ android {
 
     packagingOptions {
         resources {
-            excludes += listOf(
-                "/META-INF/{AL2.0,LGPL2.1}",
-                "META-INF/gradle/incremental.annotation.processors"
-            )
+            resources.excludes.add("META-INF/*")
         }
     }
 
