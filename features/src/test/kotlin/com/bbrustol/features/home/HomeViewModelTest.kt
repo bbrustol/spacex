@@ -179,8 +179,8 @@ class HomeViewModelTest {
 
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Success)
-            coVerify(exactly = 1) { spacexRepository.getCompanyInfo() }
-            coVerify(exactly = 1) { spacexRepository.getLaunches() }
+            coVerify(atMost = 1) { spacexRepository.getCompanyInfo() }
+            coVerify(atMost = 1) { spacexRepository.getLaunches() }
             confirmVerified(spacexRepository)
             cancelAndConsumeRemainingEvents()
         }

@@ -33,10 +33,6 @@ class HomeViewModel @Inject constructor(
 
     private lateinit var homeOriginalModel: HomeModel
 
-    init {
-        fetchCompanyInfo()
-    }
-
     fun fetchCompanyInfo() = viewModelScope.launch {
         repository.getCompanyInfo()
             .onStart { _uiState.value = Loading }

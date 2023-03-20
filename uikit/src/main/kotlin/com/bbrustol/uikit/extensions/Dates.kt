@@ -11,8 +11,10 @@ fun String.formatDate(pattern: String) : String {
         val inputFormat = SimpleDateFormat(TimeFormat.YYYYMMDD_T_HHMMSSSSSZ.pattern, Locale.getDefault())
         val outputFormat = SimpleDateFormat(pattern, Locale.getDefault())
         return outputFormat.format(inputFormat.parse(this))
-    } catch (e: ParseException) {
+    } catch (e: ParseException,) {
         "parse error"
+    } catch (e: NullPointerException,) {
+        "Null Pointer"
     }
 }
 

@@ -40,6 +40,11 @@ class MainActivity : ComponentActivity() {
 fun Start(viewModel: HomeViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     RenderState(uiState = uiState, viewModel::fetchCompanyInfo, viewModel::filterList)
+
+    DisposableEffect(key1 = viewModel) {
+        viewModel.fetchCompanyInfo()
+        onDispose { /*nothing to do*/ }
+    }
 }
 
 @Composable
