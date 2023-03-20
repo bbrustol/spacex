@@ -64,8 +64,8 @@ fun FilterChipEachRow(
                 },
                 label = { Text(text = value) },
                 border = FilterChipDefaults.filterChipBorder(
-                    borderColor = if (contains) Color.Green else Color.Red,
-                    borderWidth = if (contains) 2.dp else 2.dp
+                    borderColor = if (contains) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.inverseSurface,
+                    borderWidth = 2.dp
                 ),
                 shape = RoundedCornerShape(8.dp),
                 leadingIcon = {

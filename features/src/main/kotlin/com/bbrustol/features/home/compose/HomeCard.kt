@@ -132,9 +132,9 @@ fun CardLaunch(model: LaunchesModel) {
 @Composable
 fun getCardColor(isLaunchSuccess:Boolean): CardColors =
     cardColors(containerColor = if (isLaunchSuccess) {
-    Color.Green.copy(alpha = .4f)
+        MaterialTheme.colorScheme.primaryContainer
 } else {
-    Color.Red.copy(alpha = .4f)
+        MaterialTheme.colorScheme.errorContainer
 })
 
 @Composable
@@ -143,7 +143,6 @@ fun CardCompanyInfo(model: CompanyInfoModel) {
         Column(
             modifier = Modifier
                 .padding(16.dp)
-                .background(Color.White)
         ) {
             TextsCard(
                 stringResource(
@@ -152,9 +151,8 @@ fun CardCompanyInfo(model: CompanyInfoModel) {
                 ), 10,
                 SpanStyle(
                     fontWeight = FontWeight.W900,
-                    color = Color(0xFF4552B8),
+                    color = MaterialTheme.colorScheme.primary,
                     fontSize = 18.sp,
-                    shadow = Shadow(Color.Black, Offset.Zero, 1.2f)
                 )
             )
         }
