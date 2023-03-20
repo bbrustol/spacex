@@ -17,6 +17,7 @@ import com.bbrustol.features.R
 import com.bbrustol.features.home.*
 import com.bbrustol.features.home.HomeViewModel.*
 import com.bbrustol.features.home.HomeViewModel.UiState.*
+import com.bbrustol.features.home.compose.EmptyStateScreen
 import com.bbrustol.features.home.model.HomeModel
 import com.bbrustol.uikit.compose.FilterChipLayout
 import com.bbrustol.uikit.compose.scaffold.TopBar
@@ -100,7 +101,7 @@ private fun SetDrawer(
             ModalDrawerSheet {
                 Column(modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally) {
-                    Spacer(Modifier.height(78.dp),)
+                    Spacer(Modifier.height(78.dp))
 
                     Text(text = stringResource(UIKIT_R.string.choose_the_dates))
 
@@ -108,7 +109,7 @@ private fun SetDrawer(
                         onFilter(it, checkedState.value)
                     }
 
-                    Spacer(Modifier.height(24.dp),)
+                    Spacer(Modifier.height(24.dp))
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(modifier = Modifier.padding(8.dp), text = stringResource(UIKIT_R.string.descending))
@@ -124,6 +125,6 @@ private fun SetDrawer(
                 }
             }
         },
-        content = { LaunchesScreen(homeModel) }
+        content = { if (homeModel.launchesModel.isNotEmpty()) LaunchesScreen(homeModel) else EmptyStateScreen() }
     )
 }
