@@ -24,6 +24,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentMatchers.any
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
@@ -187,4 +188,24 @@ class HomeViewModelTest {
             cancelAndConsumeRemainingEvents()
         }
     }
+
+    @Test
+    fun `WHEN user filter the result, THEN State going to be a Success`() = runTest {
+
+        coEvery { spacexRepository.getCompanyInfo() } returns flow { emit(ApiSuccess(getCompanyInfoMock())) }
+        coEvery { spacexRepository.getLaunches() } returns flow { emit(ApiSuccess(listOf(getLaunchesMock()))) }
+
+        viewModel = HomeViewModel(spacexRepository)
+
+        viewModel.filterList(setOf(any()), true)
+
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Success)
+            coVerify(atMost = 1) { spacexRepository.getCompanyInfo() }
+            coVerify(atMost = 1) { spacexRepository.getLaunches() }
+            confirmVerified(spacexRepository)
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
 }

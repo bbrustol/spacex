@@ -84,7 +84,6 @@ class HomeViewModel @Inject constructor(
         val launchesModelList =
             homeOriginalModel.launchesModel.filter { yearsChecked.contains(checkYear(it.launchDate)) }
 
-
         _uiState.value = Success(
             HomeModel(
                 homeOriginalModel.companyInfoModel,
