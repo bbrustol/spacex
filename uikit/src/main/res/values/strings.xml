@@ -1,5 +1,9 @@
 <resources>
+    <string name="app_name">Space X</string>
+
     <string name="speech_default_image_accessibility">News Picture</string>
+    <string name="speech_close_dialog">Close Dialog</string>
+    <string name="speech_filter_topbar">Filter results</string>
 
     <string name="catch_generic_message">Generic Error, Try again</string>
 
@@ -10,5 +14,8 @@
     <string name="home_days">Time %1$s now: %2$s</string>
     <string name="days_since">since</string>
     <string name="days_from">from</string>
-
+    <string name="choose_the_dates">Choose the dates</string>
+    <string name="descending">Descending</string>
+    <string name="ops">Ooops!</string>
+    <string name="try_again">Try again</string>
 </resources>

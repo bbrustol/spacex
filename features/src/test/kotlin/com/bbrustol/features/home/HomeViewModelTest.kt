@@ -64,8 +64,8 @@ class HomeViewModelTest {
 
     @Test
     fun `WHEN viewModel is loaded, THEN State going to be an Idle`() = runTest {
-        viewModel.state.test {
-            assertTrue(awaitItem() is State.Idle)
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Idle)
             cancelAndConsumeRemainingEvents()
         }
     }
@@ -77,8 +77,8 @@ class HomeViewModelTest {
 
         viewModel.fetchCompanyInfo()
 
-        viewModel.state.test {
-            assertTrue(awaitItem() is State.Catch)
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Catch)
             coVerify(exactly = 1) { spacexRepository.getCompanyInfo() }
             coVerify(exactly = 0) { spacexRepository.getLaunches() }
             confirmVerified(spacexRepository)
@@ -93,8 +93,8 @@ class HomeViewModelTest {
 
         viewModel.fetchCompanyInfo()
 
-        viewModel.state.test {
-            assertTrue(awaitItem() is State.Catch)
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Catch)
             coVerify(exactly = 1) { spacexRepository.getCompanyInfo() }
             coVerify(exactly = 0) { spacexRepository.getLaunches() }
             confirmVerified(spacexRepository)
@@ -109,8 +109,8 @@ class HomeViewModelTest {
 
         viewModel.fetchCompanyInfo()
 
-        viewModel.state.test {
-            assertTrue(awaitItem() is State.Failure)
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Failure)
             coVerify(exactly = 1) { spacexRepository.getCompanyInfo() }
             coVerify(exactly = 0) { spacexRepository.getLaunches() }
             confirmVerified(spacexRepository)
@@ -126,8 +126,8 @@ class HomeViewModelTest {
 
         viewModel.fetchCompanyInfo()
 
-        viewModel.state.test {
-            assertTrue(awaitItem() is State.Catch)
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Catch)
             coVerify(exactly = 1) { spacexRepository.getCompanyInfo() }
             coVerify(exactly = 1) { spacexRepository.getLaunches() }
             confirmVerified(spacexRepository)
@@ -143,8 +143,8 @@ class HomeViewModelTest {
 
         viewModel.fetchCompanyInfo()
 
-        viewModel.state.test {
-            assertTrue(awaitItem() is State.Catch)
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Catch)
             coVerify(exactly = 1) { spacexRepository.getCompanyInfo() }
             coVerify(exactly = 1) { spacexRepository.getLaunches() }
             confirmVerified(spacexRepository)
@@ -160,8 +160,8 @@ class HomeViewModelTest {
 
         viewModel.fetchCompanyInfo()
 
-        viewModel.state.test {
-            assertTrue(awaitItem() is State.Failure)
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Failure)
             coVerify(exactly = 1) { spacexRepository.getCompanyInfo() }
             coVerify(exactly = 1) { spacexRepository.getLaunches() }
             confirmVerified(spacexRepository)
@@ -177,8 +177,8 @@ class HomeViewModelTest {
 
         viewModel.fetchCompanyInfo()
 
-        viewModel.state.test {
-            assertTrue(awaitItem() is State.Success)
+        viewModel.uiState.test {
+            assertTrue(awaitItem() is UiState.Success)
             coVerify(exactly = 1) { spacexRepository.getCompanyInfo() }
             coVerify(exactly = 1) { spacexRepository.getLaunches() }
             confirmVerified(spacexRepository)

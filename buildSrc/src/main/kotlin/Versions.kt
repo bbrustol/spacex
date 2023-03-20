@@ -12,6 +12,7 @@ object Versions {
     object Google {
         const val HILT = "2.45"
         const val MATERIAL = "1.8.0"
+        const val FLOW_LAYOUT = "0.29.2-rc"
     }
 
     object AndroidX {
@@ -22,6 +23,8 @@ object Versions {
         const val COMPOSE = "1.3.1"
         const val COMPOSE_UI = "1.3.3"
         const val COMPOSE_COMPILER = "1.4.3"
+        const val NAVIGATION = "25.5.3"
+        const val MATERIAL3 = "1.0.1"
     }
 
     object Squareup {

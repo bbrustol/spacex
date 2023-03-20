@@ -7,8 +7,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
+import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,9 +25,10 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bbrustol.features.home.compose.utils.CompanyInfoPreviewParamProvider
+import com.bbrustol.features.home.compose.utils.LaunchPreviewParamProvider
 import com.bbrustol.features.home.model.CompanyInfoModel
 import com.bbrustol.features.home.model.LaunchesModel
 import com.bbrustol.uikit.compose.TextsCard
@@ -37,29 +41,24 @@ import java.util.*
 import com.bbrustol.uikit.R as UIKIT_R
 
 @Composable
-fun CardLaunch(model: LaunchesModel, onClickStartSource: () -> Unit) {
+fun CardLaunch(model: LaunchesModel) {
+    val openDialogCustom = remember{ mutableStateOf(false) }
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp, 4.dp, 8.dp, 0.dp)
             .clickable { },
         shape = RoundedCornerShape(size = 4.dp),
-        backgroundColor = if (model.isLaunchSuccess == true) {
-            Color.Green.copy(alpha = .4f)
-        } else {
-            Color.Red.copy(alpha = .2f)
-        },
-        elevation = 2.dp,
+        colors = getCardColor(model.isLaunchSuccess?: false),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Row(
             modifier = Modifier
                 .padding(8.dp)
-                .clickable(onClick = onClickStartSource)
+                .clickable { openDialogCustom.value = true }
         ) {
-
             with(model) {
                 Row {
-
                     LoadImage(
                         imageUrl = imageUrl,
                         contentDescription = null,
@@ -126,8 +125,17 @@ fun CardLaunch(model: LaunchesModel, onClickStartSource: () -> Unit) {
             }
         }
     }
+    if (openDialogCustom.value) {
+        LaunchesDialog(openDialogCustom = openDialogCustom, model)
+    }
 }
-
+@Composable
+fun getCardColor(isLaunchSuccess:Boolean): CardColors =
+    cardColors(containerColor = if (isLaunchSuccess) {
+    Color.Green.copy(alpha = .4f)
+} else {
+    Color.Red.copy(alpha = .4f)
+})
 
 @Composable
 fun CardCompanyInfo(model: CompanyInfoModel) {
@@ -148,7 +156,6 @@ fun CardCompanyInfo(model: CompanyInfoModel) {
                     fontSize = 18.sp,
                     shadow = Shadow(Color.Black, Offset.Zero, 1.2f)
                 )
-
             )
         }
     }
@@ -165,43 +172,10 @@ fun CardCompanyInfoPreview(
     CardCompanyInfo(companyInfoModel)
 }
 
-
 @Preview
 @Composable
 fun LaunchCardPreview(
     @PreviewParameter(LaunchPreviewParamProvider::class) launchesModel: LaunchesModel
 ) {
-    CardLaunch(launchesModel) {}
-}
-
-private class CompanyInfoPreviewParamProvider : PreviewParameterProvider<CompanyInfoModel> {
-    override val values: Sequence<CompanyInfoModel> =
-        sequenceOf(
-            CompanyInfoModel(
-                companyName = "BBrustol Ltda",
-                founder = "Bruno Brustoloni e Oliveira",
-                founded = 3033,
-                employeesTotal = 1,
-                launchSites = 0,
-                valuation = 0
-            )
-        )
-}
-
-private class LaunchPreviewParamProvider : PreviewParameterProvider<LaunchesModel> {
-    override val values: Sequence<LaunchesModel> =
-        sequenceOf(
-            LaunchesModel(
-                id = 0,
-                imageUrl = null,
-                missionName = "Beep Beep, Guess who's Coming",
-                rocketName = "Turtle",
-                rocketType = "the long one",
-                launchDate = "3023-01-1T13:50:00.000Z",
-                isLaunchSuccess = false,
-                articleUrl = "www.google.com",
-                wikipediaUrl = "www.wikipedia.org",
-                videoUrl = ""
-            )
-        )
+    CardLaunch(launchesModel)
 }

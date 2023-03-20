@@ -4,6 +4,7 @@ object Dependencies {
 
     object Google {
         const val MATERIAL = "com.google.android.material:material:${Versions.Google.MATERIAL}"
+        const val FLOW_LAYOUT = "com.google.accompanist:accompanist-flowlayout:${Versions.Google.FLOW_LAYOUT}"
         object Hilt {
             const val ANDROID = "com.google.dagger:hilt-android:${Versions.Google.HILT}"
             const val ANDROID_COMPILER = "com.google.dagger:hilt-android-compiler:${Versions.Google.HILT}"
@@ -18,9 +19,14 @@ object Dependencies {
         object Compose {
             // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
             const val FOUNDATION = "androidx.compose.foundation:foundation:${Versions.AndroidX.COMPOSE}"
-            const val MATERIAL = "androidx.compose.material:material:${Versions.AndroidX.COMPOSE}"
+            const val FOUNDATION_LAYOUT = "androidx.compose.foundation:foundation-layout:${Versions.AndroidX.COMPOSE}"
+            const val RUNTIME = "androidx.compose.runtime:runtime-livedata:${Versions.AndroidX.COMPOSE}"
+            const val MATERIAL3 = "androidx.compose.material3:material3:${Versions.AndroidX.MATERIAL3}"
+
             const val UI ="androidx.compose.ui:ui:${Versions.AndroidX.COMPOSE_UI}"
             const val LIFECYCLE_VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.AndroidX.LIFECYCLE}"
+            const val LIFECYCLE_RUNTIME = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.AndroidX.LIFECYCLE}"
+            const val NAVIGATION = "androidx.navigation:navigation-compose:${ Versions.AndroidX.NAVIGATION}"
 
             // Tooling support (Previews, etc.)
             const val UI_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.AndroidX.COMPOSE_UI}"
@@ -73,13 +79,18 @@ object Dependencies {
 
     fun DependencyHandlerScope.commonView() {
         "implementation"(Google.MATERIAL)
+        "implementation"(Google.FLOW_LAYOUT)
 
         "implementation"(AndroidX.ACTIVITY_COMPOSE)
         "implementation"(AndroidX.Compose.FOUNDATION)
-        "implementation"(AndroidX.Compose.MATERIAL)
+        "implementation"(AndroidX.Compose.FOUNDATION_LAYOUT)
+        "implementation"(AndroidX.Compose.MATERIAL3)
         "implementation"(AndroidX.Compose.UI)
         "implementation"(AndroidX.Compose.UI_TOOLING_PREVIEW)
         "implementation"(AndroidX.Compose.LIFECYCLE_VIEWMODEL)
+        "implementation"(AndroidX.Compose.LIFECYCLE_RUNTIME)
+        "implementation"(AndroidX.Compose.RUNTIME)
+
         "debugImplementation"(AndroidX.Compose.UI_TOOLING)
         "implementation"(Others.COIL)
     }

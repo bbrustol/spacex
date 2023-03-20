@@ -1,76 +1,50 @@
 package com.bbrustol.features.home
 
-import android.util.Log
-import android.widget.Toast
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bbrustol.features.R
-import com.bbrustol.features.home.HomeViewModel.State
-import com.bbrustol.features.home.HomeViewModel.State.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.bbrustol.features.home.compose.CardCompanyInfo
 import com.bbrustol.features.home.compose.CardLaunch
+import com.bbrustol.features.home.compose.ErrorScreen
 import com.bbrustol.features.home.model.HomeModel
-import com.bbrustol.uikit.theme.SpacexTheme
 
 @Composable
-fun HomeScreen(
-    viewModel: HomeViewModel = viewModel()
-) {
-    val state by viewModel.state.collectAsState()
+fun ShowGenericError(message: String, onRetryAction:() -> Unit) {
+    ErrorScreen(message = message, onRetryAction)
+}
 
-    DisposableEffect(key1 = viewModel) {
-        viewModel.fetchCompanyInfo()
-        onDispose { /*nothing to do*/ }
+@Composable
+fun ShowError(code: Int, message: String?, onRetryAction:() -> Unit) {
+    ErrorScreen("code error: $code - $message", onRetryAction )
+}
+
+@Composable
+fun IsLoading() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator()
     }
-
-    RenderState(state)
 }
 
 @Composable
-fun RenderState(state: State) = when (state) {
-    Idle -> isIdle()
-    Loading -> isLoading()
-    is Failure -> showError(state.code, state.message)
-    is Catch -> showGenericError(state.message ?: stringResource(R.string.catch_generic_message))
-    is Success -> ShowSuccess(state.homeModel)
-}
-private fun showGenericError(message: String) { Log.d("UI", "GenericEror - $message") }
-
-private fun showError(code: Int, message: String?) { Log.d("UI", "Error - $code | $message") }
-
-private fun isLoading() { Log.d("UI", "Loding") }
-
-fun isIdle() { Log.d("UI", "Idle") }
-@Composable
-fun ShowSuccess(homeModel: HomeModel) {
-    Log.d("UI", "Success")
-    val context = LocalContext.current
+fun LaunchesScreen(homeModel: HomeModel) {
     val state = rememberLazyListState()
     LazyColumn(state = state) {
         item {
+            Spacer(modifier = Modifier.height(58.dp))
             CardCompanyInfo(homeModel.companyInfoModel)
         }
         items(homeModel.launchesModel) {
-            CardLaunch(it) {
-                Toast.makeText(context, it.rocketName, Toast.LENGTH_SHORT).show()
-            }
+            CardLaunch(it)
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SpacexPreview() {
-    SpacexTheme {
-        HomeScreen()
     }
 }
