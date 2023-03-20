@@ -33,7 +33,7 @@ class HomeViewModelTest {
 
     private val spacexRepository = mockk<SpacexRepository>()
 
-    private val viewModel = HomeViewModel(spacexRepository)
+    private lateinit var viewModel: HomeViewModel
 
     private lateinit var moshi: Moshi
 
@@ -64,6 +64,8 @@ class HomeViewModelTest {
 
     @Test
     fun `WHEN viewModel is loaded, THEN State going to be an Idle`() = runTest {
+        viewModel = HomeViewModel(spacexRepository)
+
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Idle)
             cancelAndConsumeRemainingEvents()
@@ -75,7 +77,7 @@ class HomeViewModelTest {
 
         coEvery { spacexRepository.getCompanyInfo() } returns flow { throw IllegalStateException() }
 
-        viewModel.fetchCompanyInfo()
+        viewModel = HomeViewModel(spacexRepository)
 
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Catch)
@@ -91,7 +93,7 @@ class HomeViewModelTest {
 
         coEvery { spacexRepository.getCompanyInfo() } returns flow { emit(ApiException(Throwable(""))) }
 
-        viewModel.fetchCompanyInfo()
+        viewModel = HomeViewModel(spacexRepository)
 
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Catch)
@@ -107,7 +109,7 @@ class HomeViewModelTest {
 
         coEvery { spacexRepository.getCompanyInfo() } returns flow { emit(ApiError(0, "")) }
 
-        viewModel.fetchCompanyInfo()
+        viewModel = HomeViewModel(spacexRepository)
 
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Failure)
@@ -124,7 +126,7 @@ class HomeViewModelTest {
         coEvery { spacexRepository.getCompanyInfo() } returns flow { emit(ApiSuccess(getCompanyInfoMock())) }
         coEvery { spacexRepository.getLaunches() } returns flow { throw IllegalStateException() }
 
-        viewModel.fetchCompanyInfo()
+        viewModel = HomeViewModel(spacexRepository)
 
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Catch)
@@ -141,7 +143,7 @@ class HomeViewModelTest {
         coEvery { spacexRepository.getCompanyInfo() } returns flow { emit(ApiSuccess(getCompanyInfoMock())) }
         coEvery { spacexRepository.getLaunches() } returns flow { emit(ApiException(Throwable(""))) }
 
-        viewModel.fetchCompanyInfo()
+        viewModel = HomeViewModel(spacexRepository)
 
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Catch)
@@ -158,7 +160,7 @@ class HomeViewModelTest {
         coEvery { spacexRepository.getCompanyInfo() } returns flow { emit(ApiSuccess(getCompanyInfoMock())) }
         coEvery { spacexRepository.getLaunches() } returns flow { emit(ApiError(0, "")) }
 
-        viewModel.fetchCompanyInfo()
+        viewModel = HomeViewModel(spacexRepository)
 
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Failure)
@@ -175,7 +177,7 @@ class HomeViewModelTest {
         coEvery { spacexRepository.getCompanyInfo() } returns flow { emit(ApiSuccess(getCompanyInfoMock())) }
         coEvery { spacexRepository.getLaunches() } returns flow { emit(ApiSuccess(listOf(getLaunchesMock()))) }
 
-        viewModel.fetchCompanyInfo()
+        viewModel = HomeViewModel(spacexRepository)
 
         viewModel.uiState.test {
             assertTrue(awaitItem() is UiState.Success)
