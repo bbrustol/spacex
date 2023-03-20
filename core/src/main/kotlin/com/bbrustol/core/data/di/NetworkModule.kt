@@ -1,12 +1,16 @@
 package com.bbrustol.core.data.di
 
+import android.content.Context
 import com.bbrustol.core.BuildConfig
+import com.bbrustol.core.data.infrastructure.ApiCacheInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -26,20 +30,23 @@ class NetworkModule {
     fun provideBaseUrl() = BuildConfig.BASE_URL
 
     @Provides
-    @Named("OK_HTTP_CLIENT")
-    fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+    fun providesCacheInterceptor(@ApplicationContext context: Context): Interceptor =
+        ApiCacheInterceptor(context)
 
+    @Provides
+    @Named("OK_HTTP_CLIENT")
+    fun provideOkHttpClient(@ApplicationContext context: Context, interceptor: Interceptor) = if (BuildConfig.DEBUG) {
         OkHttpClient
             .Builder()
-            .addInterceptor(loggingInterceptor)
+            .cache(Cache(context.cacheDir, (5 * 1024 * 1024).toLong()))
+            .addInterceptor(interceptor)
             .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .build()
     } else OkHttpClient
         .Builder()
+        .cache(Cache(context.cacheDir, (5 * 1024 * 1024).toLong()))
         .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT, TimeUnit.SECONDS)
         .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
