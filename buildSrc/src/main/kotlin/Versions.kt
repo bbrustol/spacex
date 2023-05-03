@@ -10,18 +10,18 @@ object Versions {
     }
 
     object Google {
-        const val HILT = "2.45"
+        const val HILT = "2.46"
         const val MATERIAL = "1.8.0"
-        const val FLOW_LAYOUT = "0.29.2-rc"
+        const val FLOW_LAYOUT = "0.30.1"
     }
 
     object AndroidX {
-        const val CORE_KTX = "1.9.0"
+        const val CORE_KTX = "1.10.0"
         const val APPCOMPAT = "1.6.1"
-        const val LIFECYCLE = "2.6.0"
-        const val ACTIVITY_COMPOSE = "1.6.1"
-        const val COMPOSE = "1.3.1"
-        const val COMPOSE_UI = "1.3.3"
+        const val LIFECYCLE = "2.6.1"
+        const val ACTIVITY_COMPOSE = "1.7.1"
+        const val COMPOSE = "1.4.2"
+        const val COMPOSE_UI = "1.4.2"
         const val COMPOSE_COMPILER = "1.4.3"
         const val NAVIGATION = "25.5.3"
         const val MATERIAL3 = "1.0.1"
@@ -29,7 +29,7 @@ object Versions {
 
     object Squareup {
         const val RETROFIT = "2.9.0"
-        const val OKHTTP3 = "4.10.0"
+        const val OKHTTP3 = "4.11.0"
     }
 
     object Test {
@@ -39,23 +39,23 @@ object Versions {
         const val ESPRESSO = "3.4.0"
         const val COMPOSE_UI_TEST = "1.2.1"
 
-        const val MOCKK = "1.13.4"
+        const val MOCKK = "1.13.5"
         const val MOCK_WEBSERVER = "3.12.0"
-        const val TURBINE = "0.12.1"
+        const val TURBINE = "0.12.3"
 
         const val RUNNER = "1.1.0"
     }
 
     object Others {
-        const val COIL = "2.2.2"
+        const val COIL = "2.3.0"
     }
 
     const val COROUTINES = "1.6.4"
 
     // Make sure to update `buildSrc/build.gradle.kts` when updating this
-    const val GRADLE = "7.4.2"
+    const val GRADLE = "8.0.1"
     // Make sure to update `buildSrc/build.gradle.kts` when updating this
     const val KOTLIN = "1.8.10"
 
-    val JAVA = JavaVersion.VERSION_1_8
+    val JAVA = JavaVersion.VERSION_17
 }

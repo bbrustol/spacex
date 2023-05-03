@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bbrustol.features.R
+
 import com.bbrustol.features.home.*
 import com.bbrustol.features.home.HomeViewModel.*
 import com.bbrustol.features.home.HomeViewModel.UiState.*
@@ -24,7 +24,7 @@ import com.bbrustol.uikit.compose.scaffold.TopBar
 import com.bbrustol.uikit.theme.SpacexTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.bbrustol.spacex.R as UIKIT_R
+import com.bbrustol.uikit.R as UIKIT_R
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -50,7 +50,7 @@ fun RenderState(uiState: UiState, onRetryAction: () -> Unit, onFilter: (Set<Stri
         Loading -> IsLoading()
         is Failure -> ShowError(uiState.code, uiState.message, onRetryAction)
         is Catch -> ShowGenericError(
-            uiState.message ?: stringResource(R.string.catch_generic_message),
+            uiState.message ?: stringResource(UIKIT_R.string.catch_generic_message),
             onRetryAction
         )
         is Success -> SetupView(uiState.homeModel, onFilter)

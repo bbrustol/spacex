@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:7.4.2")
+    implementation("com.android.tools.build:gradle:8.0.1")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
     //need it because of Hilt
     implementation("com.squareup:javapoet:1.13.0")

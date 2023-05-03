@@ -56,7 +56,7 @@ android {
         kotlinCompilerExtensionVersion = Versions.AndroidX.COMPOSE_COMPILER
     }
 
-    packagingOptions {
+    packaging {
         resources {
             resources.excludes.add("META-INF/*")
         }

@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.bbrustol.features.R as UIKIT_R
+import com.bbrustol.uikit.R as UIKIT_R
 import com.bbrustol.features.home.compose.utils.LaunchPreviewParamProvider
 import com.bbrustol.features.home.model.LaunchesModel
 
